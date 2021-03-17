@@ -52,18 +52,29 @@ def load_data():
     else:
         # This for processing the dataset from scratch
         # After downloading the dataset, put it to somewhere that str_folder can find
-        str_folder = config_info['data_folder_raw'] + 'UCI HAR Dataset/'
-        INPUT_SIGNAL_TYPES = [
-            "body_acc_x_",
-            "body_acc_y_",
-            "body_acc_z_",
-            "body_gyro_x_",
-            "body_gyro_y_",
-            "body_gyro_z_",
-            "total_acc_x_",
-            "total_acc_y_",
-            "total_acc_z_"
-        ]
+        str_folder = config_info['data_folder_raw'] + config_info['dataset']
+        INPUT_SIGNAL_TYPES = []
+        if config_info['dataset'] == 'UCI HAR Dataset/':
+            INPUT_SIGNAL_TYPES = [
+                "body_acc_x_",
+                "body_acc_y_",
+                "body_acc_z_",
+                "body_gyro_x_",
+                "body_gyro_y_",
+                "body_gyro_z_",
+                "total_acc_x_",
+                "total_acc_y_",
+                "total_acc_z_"
+            ]
+        elif config_info['dataset'] == 'formattet_dataset_uci/':
+            INPUT_SIGNAL_TYPES = [
+                "body_acc_x_",
+                "body_acc_y_",
+                "body_acc_z_",
+                "body_gyro_x_",
+                "body_gyro_y_",
+                "body_gyro_z_"
+            ]
 
         str_train_files = [str_folder + 'train/' + 'Inertial Signals/' + item + 'train.txt' for item in
                            INPUT_SIGNAL_TYPES]

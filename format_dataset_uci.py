@@ -10,7 +10,7 @@ def remove_prefix(text, prefix):
     return text  
 def remove_suffix(text, suffix):
     if text.endswith(suffix):
-        return text[:len(suffix)]
+        return text[:-len(suffix)]
 
 load_dotenv()
 datafile_Path = os.getenv('DATAFILE_PATH') #Change this to your file location
@@ -70,10 +70,12 @@ for file in files:
             path = new_datafile_path + '\\train\\'
         if 'acc' in file or 'gyro' in file:
             path = path + 'Inertial Signals\\'
-            temp_file = remove_suffix(temp_file, '.txt')
-            x_path = path + temp_file + '_x.txt'
-            y_path = path + temp_file + '_y.txt'
-            z_path = path + temp_file + '_z.txt'
+            temp_file =  remove_suffix(temp_file, '.txt')
+            splitfile = temp_file.split('_')
+            splitfile[0] = 'body_' + splitfile [0]
+            x_path = path + splitfile[0] + '_x_' + splitfile[1] + '.txt'
+            y_path = path + splitfile[0] + '_y_' + splitfile[1] + '.txt'
+            z_path = path + splitfile[0] + '_z_' + splitfile[1] + '.txt'
             x_file = open(x_path, 'w')
             y_file = open(y_path, 'w')
             z_file = open(z_path, 'w')
