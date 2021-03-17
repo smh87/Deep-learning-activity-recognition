@@ -81,10 +81,17 @@ for file in files:
             z_file = open(z_path, 'w')
             with open(datafile_Path + '\\dataset_uci\\' + file, 'rt') as f:
                 data = csv.reader(f)
+                i = 0
                 for row in data:
-                    x_file.write(row[0])
-                    y_file.write(row[1])
-                    z_file.write(row[2])
+                    x_file.write(' ' + row[0] if row[0].startswith('-') else '  ' + row[0])
+                    y_file.write(' ' + row[1] if row[1].startswith('-') else '  ' + row[1])
+                    z_file.write(' ' + row[2] if row[2].startswith('-') else '  ' + row[2])
+                    i += 1
+                    if i == 89:
+                        x_file.write('\n')
+                        y_file.write('\n')
+                        z_file.write('\n')
+                        i = 0
             x_file.close()
             y_file.close()
             z_file.close()
